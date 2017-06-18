@@ -15,9 +15,9 @@ use AppBundle\Entity\Visit;
 
 class UserController extends FOSRestController
 {
-    
+
     /**
-     * @Rest\Get("/user/{id}")
+     * @Rest\Get("/users/{id}")
      * @ApiDoc(
      *     description="Returns a user by its id",
      *     statusCodes={
@@ -40,7 +40,7 @@ class UserController extends FOSRestController
     }
 
     /**
-     * @Rest\Get("/users")
+     * @Rest\Get("/users/")
      *
      * @ApiDoc(
      *     description="Returns all users",
@@ -59,7 +59,7 @@ class UserController extends FOSRestController
     }
 
     /**
-     * @Rest\Post("/user_create/")
+     * @Rest\Post("/users/")
      *
      * @ApiDoc(
      *     description="Creates a user with login and name",
@@ -87,11 +87,11 @@ class UserController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $em->persist($user);
         $em->flush();
-        return new View("User was added successfully", Response::HTTP_OK);
+        return $user;
     }
 
     /**
-     * @Rest\Put("/user_update/{id}")
+     * @Rest\Put("/users/{id}")
      *
      *
      *  @ApiDoc(
@@ -107,8 +107,7 @@ class UserController extends FOSRestController
      *
      *     },
      *     requirements={
-     *      {"name"="id", "dataType"="integer", "required"=true, "description"="user id"}
-     *   },
+     *     {"name"="id", "dataType"="integer", "required"=true, "description"="user id"}},
      *    parameters={
      *      {"name"="login", "dataType"="string", "required"=false, "description"="user login"},
      *      {"name"="name", "dataType"="integer", "required"=false, "description"="user name"}
@@ -143,7 +142,7 @@ class UserController extends FOSRestController
     }
 
     /**
-     * @Rest\Delete("/user_remove/{id}")
+     * @Rest\Delete("/users/{id}")
      *
      * @ApiDoc(
      *     description="Removes a user by id",
@@ -171,7 +170,7 @@ class UserController extends FOSRestController
     }
 
     /**
-     * @Rest\Post("/visit")
+     * @Rest\Post("/users/visit")
      *
      * @ApiDoc(
      *     description="Registers a user with timestamp(datetime type)",
@@ -212,7 +211,7 @@ class UserController extends FOSRestController
 
 
     /**
-     * @Rest\Post("/get_dau")
+     * @Rest\Post("/users/get_dau")
      *
      * @ApiDoc(
      *     description="Gets a dau by dateFrom and dateTo",

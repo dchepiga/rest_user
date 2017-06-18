@@ -15,8 +15,8 @@ class VisitRepository extends EntityRepository
     {
         return $this->getEntityManager()
             ->createQuery(
-                'SELECT COUNT( DISTINCT v.user ) as dau FROM  AppBundle:Visit v WHERE v.visitedOn BETWEEN  ?1 AND  ?2'
+                'SELECT date(v.visitedOn) as dates, COUNT( DISTINCT v.user ) as dau FROM  AppBundle:Visit v WHERE v.visitedOn BETWEEN  ?1 AND  ?2 group by dates'
             )->setParameters([1=>$dateFrom,2=>$dateTo])
-            ->getSingleResult();
+            ->getResult();
     }
 }
